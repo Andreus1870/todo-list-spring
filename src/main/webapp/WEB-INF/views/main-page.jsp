@@ -19,9 +19,9 @@
                 </div>
             </div>
             <div class="filter-container">
-                <form class="filter-form">
+                <form action="/change-filter" class="filter-form">
                     <div class="filter-form__input">
-                        <input type="radio" id="filter-form__status_all" name="filter" value="all" checked>
+                        <input type="radio" id="filter-form__status_all" name="filter" value="all">
                         <label for="filter-form__status_all">All</label>
                     </div>
                     <div class="filter-form__input">

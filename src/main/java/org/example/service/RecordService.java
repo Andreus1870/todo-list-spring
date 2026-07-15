@@ -6,6 +6,7 @@ import org.example.entity.RecordStatus;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -34,5 +35,9 @@ public class RecordService {
 
     public void deleteRecord(int id) {
         recordDao.deleteRecord(id);
+    }
+
+    public List<Record> findByStatus (RecordStatus status) {
+        return recordDao.findByStatus(status);
     }
 }

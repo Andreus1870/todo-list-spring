@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import javax.servlet.http.HttpSession;
 import java.util.List;
 
 @Controller
@@ -27,8 +28,16 @@ public class CommonController {
     }
 
     @RequestMapping("/home")
-    public String getMainPage(Model model) {
+    public String getMainPage(Model model, HttpSession session) {
+        if (session.isNew()) {
+            session.setAttribute("selectedFilter", "all");
+        }
         List<Record> records = recordService.findAllRecords();
+        if ("active".equals(session.getAttribute("selectedFilter"))) {
+            records = recordService.findByStatus(RecordStatus.ACTIVE);
+        } else if ("done".equals(session.getAttribute("selectedFilter"))) {
+            records = recordService.findByStatus(RecordStatus.DONE);
+        }
         int numberOfDoneRecords = (int) records.stream().filter(record -> record.getStatus() == RecordStatus.DONE).count();
         int numberOfActiveRecords = (int) records.stream().filter(record -> record.getStatus() == RecordStatus.ACTIVE).count();
         model.addAttribute("numberOfDoneRecords", numberOfDoneRecords);
@@ -52,6 +61,14 @@ public class CommonController {
     @RequestMapping(value = "/delete-record", method = RequestMethod.POST)
     public String deleteRecord(@RequestParam int id) {
         recordService.deleteRecord(id);
+        return "redirect:/home";
+    }
+
+    @RequestMapping(value = "/change-filter", method = RequestMethod.GET)
+    public String changeFilter(@RequestParam(required = false) String filter, HttpSession session) {
+        if (filter != null){
+            session.setAttribute("selectedFilter", filter);
+        }
         return "redirect:/home";
     }
 }

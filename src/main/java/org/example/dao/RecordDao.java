@@ -5,10 +5,7 @@ import org.example.entity.RecordStatus;
 import org.springframework.stereotype.Repository;
 
 import java.awt.color.ICC_ColorSpace;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.StringTokenizer;
+import java.util.*;
 
 @Repository
 public class RecordDao {
@@ -39,5 +36,15 @@ public class RecordDao {
 
     public void deleteRecord(int id) {
         records.removeIf(item -> item.getId() == id);
+    }
+
+    public List<Record> findByStatus (RecordStatus status) {
+        List<Record> filteredRecords = new ArrayList<>();
+        for (Record item : records) {
+            if (item.getStatus() == status) {
+                filteredRecords.add(item);
+            }
+        }
+        return filteredRecords;
     }
 }
