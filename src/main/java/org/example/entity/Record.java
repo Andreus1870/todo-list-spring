@@ -1,19 +1,22 @@
 package org.example.entity;
 
 public class Record {
-    private static int counterSequence = 0;
-    private final int id;
+    private int id;
     private final String title;
     private RecordStatus status;
 
     public Record(String title) {
-        this.id = counterSequence++;
         this.title = title;
         this.status = RecordStatus.ACTIVE;
     }
 
     public Record(String title, RecordStatus status) {
-        this.id = counterSequence++;
+        this.title = title;
+        this.status = status;
+    }
+
+    public Record(int id, String title, RecordStatus status) {
+        this.id = id;
         this.title = title;
         this.status = status;
     }
