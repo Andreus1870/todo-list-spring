@@ -18,6 +18,7 @@
         <spring.version>5.3.29</spring.version>
         <servlet.version>4.0.1</servlet.version>
         <jstl.version>1.2</jstl.version>
+        <postgresql.version>42.7.1</postgresql.version>
 
     </properties>
 
@@ -43,8 +44,13 @@
         <dependency>
             <groupId>org.postgresql</groupId>
             <artifactId>postgresql</artifactId>
-            <version>42.7.1</version>
-            <scope>compile</scope>   <!-- замість scope за замовчуванням -->
+            <version>${postgresql.version}</version>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-jdbc</artifactId>
+            <version>${spring.version}</version>
         </dependency>
     </dependencies>
 
