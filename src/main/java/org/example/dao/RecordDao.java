@@ -7,57 +7,111 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Query;
 import java.awt.color.ICC_ColorSpace;
 import java.sql.*;
 import java.util.*;
 
 @Repository
 public class RecordDao {
-    private final JdbcTemplate jdbcTemplate;
+    private final EntityManagerFactory entityManagerFactory;
 
     @Autowired
-    public RecordDao(JdbcTemplate jdbcTemplate) {
-        this.jdbcTemplate = jdbcTemplate;
+    public RecordDao(EntityManagerFactory entityManagerFactory) {
+        this.entityManagerFactory = entityManagerFactory;
     }
 
-    public List<Record> findAllRecords() {
-        return jdbcTemplate.query("SELECT * FROM records",
-                (rs, rowNum) -> new Record(
-                        rs.getInt("id"),
-                        rs.getString("title"),
-                        RecordStatus.valueOf(rs.getString("status"))
-                ));
+    public List<Record> findAllRecords () {
+
+        EntityManager entityManager = entityManagerFactory.createEntityManager();
+        try {
+            entityManager.getTransaction().begin();
+
+            Query query = entityManager.createQuery("SELECT r FROM Record r");
+            List<Record> records = query.getResultList();
+
+            entityManager.getTransaction().commit();
+            return records;
+        } catch (Exception exception) {
+            exception.printStackTrace();
+            entityManager.getTransaction().rollback();
+            return Collections.emptyList();
+        } finally {
+            entityManager.close();
+        }
     }
+
 
     public void saveRecord(Record record) {
-        jdbcTemplate.update(
-                "INSERT INTO records (title, status) VALUES (?, ?)",
-                record.getTitle(),
-                record.getStatus().name()
-        );
+        EntityManager entityManager = entityManagerFactory.createEntityManager();
+        try {
+            entityManager.getTransaction().begin();
+            entityManager.persist(record);
+            entityManager.getTransaction().commit();
+        } catch (Exception exception) {
+            exception.printStackTrace();
+            entityManager.getTransaction().rollback();
+        } finally {
+            entityManager.close();
+        }
     }
 
     public void updateRecordStatus(int id, RecordStatus newStatus) {
-        jdbcTemplate.update(
-                "UPDATE records SET status = ? WHERE id = ?",
-                newStatus.name(),
-                id
-        );
+        EntityManager entityManager = entityManagerFactory.createEntityManager();
+        try {
+            entityManager.getTransaction().begin();
+
+            Query query = entityManager.createQuery("UPDATE Record SET status = :newStatus WHERE id = :id");
+            query.setParameter("newStatus", newStatus);
+            query.setParameter("id", id);
+            query.executeUpdate();
+
+            entityManager.getTransaction().commit();
+        } catch (Exception exception) {
+            exception.printStackTrace();
+            entityManager.getTransaction().rollback();
+        } finally {
+            entityManager.close();
+        }
     }
 
     public void deleteRecord(int id) {
-        jdbcTemplate.update("DELETE FROM records WHERE id = ?", id);
+        EntityManager entityManager = entityManagerFactory.createEntityManager();
+        try {
+            entityManager.getTransaction().begin();
+
+            Query query = entityManager.createQuery("DELETE FROM Record WHERE id = :id");
+            query.setParameter("id", id);
+            query.executeUpdate();
+
+            entityManager.getTransaction().commit();
+        } catch (Exception exception) {
+            exception.printStackTrace();
+            entityManager.getTransaction().rollback();
+        } finally {
+            entityManager.close();
+        }
     }
 
-    public List<Record> findByStatus(RecordStatus status) {
-        return jdbcTemplate.query(
-                "SELECT * FROM records WHERE status = ?",
-                (rs, rowNum) -> new Record(
-                        rs.getInt("id"),
-                        rs.getString("title"),
-                        RecordStatus.valueOf(rs.getString("status"))
-                ),
-                status.name()
-        );
+    public List<Record> findByStatus (RecordStatus status) {
+        EntityManager entityManager = entityManagerFactory.createEntityManager();
+        try {
+            entityManager.getTransaction().begin();
+
+            Query query = entityManager.createQuery( "FROM Record WHERE status = :status");
+            query.setParameter("status", status);
+            List<Record> records = query.getResultList();
+
+            entityManager.getTransaction().commit();
+            return records;
+        } catch (Exception exception) {
+            exception.printStackTrace();
+            entityManager.getTransaction().rollback();
+            return Collections.emptyList();
+        } finally {
+            entityManager.close();
+        }
     }
 }

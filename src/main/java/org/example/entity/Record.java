@@ -1,9 +1,23 @@
 package org.example.entity;
 
+import javax.persistence.*;
+
+@Entity
+@Table(name = "records")
 public class Record {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
     private int id;
-    private final String title;
+
+    @Column(name = "title", nullable = false, length = 64)
+    private String title;
+
+    @Column(name = "status", nullable = false)
     private RecordStatus status;
+
+    public Record() {
+    }
 
     public Record(String title) {
         this.title = title;
@@ -15,17 +29,21 @@ public class Record {
         this.status = status;
     }
 
-    public Record(int id, String title, RecordStatus status) {
-        this.id = id;
-        this.title = title;
-        this.status = status;
-    }
 
     public int getId() {
         return id;
     }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
     public String getTitle() {
         return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
     }
 
     public RecordStatus getStatus() {
