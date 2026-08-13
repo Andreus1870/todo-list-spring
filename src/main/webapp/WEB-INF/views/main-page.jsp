@@ -1,4 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ page contentType="text/html;charset=UTF-8" %>
 
 <!DOCTYPE html>
@@ -19,17 +20,17 @@
                 </div>
             </div>
             <div class="filter-container">
-                <form action="/change-filter" class="filter-form">
+                <form action="/home" method="get" class="filter-form">
                     <div class="filter-form__input">
-                        <input type="radio" id="filter-form__status_all" name="filter" value="all">
+                        <input type="radio" id="filter-form__status_all" name="filter" value="all" ${empty param.filter or (fn:toLowerCase(param.filter) != 'done' and fn:toLowerCase(param.filter) != 'active') ? 'checked' : ''}>
                         <label for="filter-form__status_all">All</label>
                     </div>
                     <div class="filter-form__input">
-                        <input type="radio" id="filter-form__status_active" name="filter" value="active">
+                        <input type="radio" id="filter-form__status_active" name="filter" value="active" ${fn:toLowerCase(param.filter) == 'active' ? 'checked' : ''}>
                         <label for="filter-form__status_active">Active</label>
                     </div>
                     <div class="filter-form__input">
-                        <input type="radio" id="filter-form__status_done" name="filter" value="done">
+                        <input type="radio" id="filter-form__status_done" name="filter" value="done" ${fn:toLowerCase(param.filter) == 'done' ? 'checked' : ''}>
                         <label for="filter-form__status_done">Done</label>
                     </div>
                     <button type="submit">Apply</button>
@@ -45,6 +46,7 @@
                                     <c:if test="${record.status == 'ACTIVE'}">
                                         <form action="/make-record-done" method="post" class="record__controls-form">
                                             <input type="hidden" name="id" value="${record.id}">
+                                            <input type="hidden" name="filter" value="${param.filter}">
                                             <button type="submit" class="button_type_approve">
                                                 <svg width="17" height="17" viewBox="0 0 17 17" fill="none" xmlns="http://www.w3.org/2000/svg">
                                                     <g clip-path="url(#clip0_258_5036)">
@@ -61,6 +63,7 @@
                                     </c:if>
                                     <form action="/delete-record" method="post" class="record__controls-form">
                                         <input type="hidden" name="id" value="${record.id}">
+                                        <input type="hidden" name="filter" value="${fn:toLowerCase(param.filter)}">
                                         <button type="submit" class="button_type_close">
                                             <svg width="24" height="24" viewBox="0 0 24 24">
                                                 <path d="M12.071 13.485l-2.828 2.829-1.415-1.415 2.829-2.828-2.829-2.828 1.415-1.415 2.828 2.829L14.9 7.828l.707.708.707.707-2.829 2.828 2.829 2.829-1.415 1.414-2.828-2.829z" fill="#000"></path>
@@ -72,9 +75,24 @@
                         </c:forEach>
                     </c:when>
                     <c:otherwise>
-                        <div class="hint">
-                            <span>No tasks yet...</span>
-                        </div>
+                        <c:choose>
+                            <c:when test="${fn:toLowerCase(param.filter) == 'active'}">
+                                <div class="hint">
+                                    <span>There are no active tasks!</span>
+                                </div>
+                            </c:when>
+
+                            <c:when test="${fn:toLowerCase(param.filter) == 'done'}">
+                                <div class="hint">
+                                    <span>There are no done tasks!</span>
+                                </div>
+                            </c:when>
+                            <c:otherwise>
+                                <div class="hint">
+                                    <span>No tasks yet...</span>
+                                </div>
+                            </c:otherwise>
+                        </c:choose>
                     </c:otherwise>
                 </c:choose>
             </div>

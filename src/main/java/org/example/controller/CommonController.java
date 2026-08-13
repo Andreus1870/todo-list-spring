@@ -2,6 +2,7 @@ package org.example.controller;
 
 import org.example.entity.Record;
 import org.example.entity.RecordStatus;
+import org.example.entity.dto.RecordsContainerDto;
 import org.example.service.RecordService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -28,21 +29,11 @@ public class CommonController {
     }
 
     @RequestMapping("/home")
-    public String getMainPage(Model model, HttpSession session) {
-        if (session.isNew()) {
-            session.setAttribute("selectedFilter", "all");
-        }
-        List<Record> records = recordService.findAllRecords();
-        if ("active".equals(session.getAttribute("selectedFilter"))) {
-            records = recordService.findByStatus(RecordStatus.ACTIVE);
-        } else if ("done".equals(session.getAttribute("selectedFilter"))) {
-            records = recordService.findByStatus(RecordStatus.DONE);
-        }
-        int numberOfDoneRecords = (int) records.stream().filter(record -> record.getStatus() == RecordStatus.DONE).count();
-        int numberOfActiveRecords = (int) records.stream().filter(record -> record.getStatus() == RecordStatus.ACTIVE).count();
-        model.addAttribute("numberOfDoneRecords", numberOfDoneRecords);
-        model.addAttribute("records", records);
-        model.addAttribute("numberOfActiveRecords", numberOfActiveRecords);
+    public String getMainPage(Model model, @RequestParam(name = "filter", required = false) String filterMode) {
+        RecordsContainerDto container = recordService.findAllRecords(filterMode);
+        model.addAttribute("records", container.getRecords());
+        model.addAttribute("numberOfDoneRecords", container.getNumberOfDoneRecords());
+        model.addAttribute("numberOfActiveRecords", container.getNumberOfActiveRecords());
         return "main-page";
     }
 
@@ -53,22 +44,16 @@ public class CommonController {
     }
 
     @RequestMapping(value = "/make-record-done", method = RequestMethod.POST)
-    public String makeRecordDone(@RequestParam int id) {
+    public String makeRecordDone(@RequestParam int id,
+                                 @RequestParam(name = "filter", required = false) String filterMode) {
         recordService.updateRecordStatus(id, RecordStatus.DONE);
-        return "redirect:/home";
+        return "redirect:/home" + (filterMode != null && !filterMode.isBlank() ? "?filter=" + filterMode : "");
     }
 
     @RequestMapping(value = "/delete-record", method = RequestMethod.POST)
-    public String deleteRecord(@RequestParam int id) {
+    public String deleteRecord(@RequestParam int id,
+                               @RequestParam(name = "filter", required = false) String filterMode) {
         recordService.deleteRecord(id);
-        return "redirect:/home";
-    }
-
-    @RequestMapping(value = "/change-filter", method = RequestMethod.GET)
-    public String changeFilter(@RequestParam(required = false) String filter, HttpSession session) {
-        if (filter != null){
-            session.setAttribute("selectedFilter", filter);
-        }
-        return "redirect:/home";
+        return "redirect:/home" + (filterMode != null && !filterMode.isBlank() ? "?filter=" + filterMode : "");
     }
 }
