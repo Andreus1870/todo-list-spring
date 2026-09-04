@@ -1,59 +1,61 @@
-package org.example.controller;
+package org.example.controller.secured;
 
-import org.example.entity.Record;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
 import org.example.entity.RecordStatus;
+import org.example.entity.User;
 import org.example.entity.dto.RecordsContainerDto;
 import org.example.service.RecordService;
+import org.example.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import javax.servlet.http.HttpSession;
-import java.util.List;
+import java.util.Objects;
 
 @Controller
-public class CommonController {
+@RequestMapping("/account")
+public class PrivateAccountController {
     private final RecordService recordService;
+    private final UserService userService;
 
     @Autowired
-    public CommonController(RecordService recordService) {
+    public PrivateAccountController(RecordService recordService, UserService userService) {
         this.recordService = recordService;
+        this.userService = userService;
     }
 
-    @RequestMapping("/")
-    public String redirectToMainPage() {
-        return "redirect:/home";
-    }
-
-    @RequestMapping("/home")
+    @RequestMapping
     public String getMainPage(Model model, @RequestParam(name = "filter", required = false) String filterMode) {
         RecordsContainerDto container = recordService.findAllRecords(filterMode);
         model.addAttribute("records", container.getRecords());
+        model.addAttribute("userName", container.getUserName());
         model.addAttribute("numberOfDoneRecords", container.getNumberOfDoneRecords());
         model.addAttribute("numberOfActiveRecords", container.getNumberOfActiveRecords());
-        return "main-page";
+        return "private/account-page";
     }
 
-    @RequestMapping(value = "/add-record", method = RequestMethod.POST)
+    @PostMapping("/add-record")
     public String addRecord(@RequestParam String title) {
         recordService.saveRecords(title);
-        return "redirect:/home";
+        return "redirect:/account";
     }
 
-    @RequestMapping(value = "/make-record-done", method = RequestMethod.POST)
+    @PostMapping("/make-record-done")
     public String makeRecordDone(@RequestParam int id,
                                  @RequestParam(name = "filter", required = false) String filterMode) {
         recordService.updateRecordStatus(id, RecordStatus.DONE);
-        return "redirect:/home" + (filterMode != null && !filterMode.isBlank() ? "?filter=" + filterMode : "");
+        return "redirect:/account" + (filterMode != null && !filterMode.isBlank() ? "?filter=" + filterMode : "");
     }
 
-    @RequestMapping(value = "/delete-record", method = RequestMethod.POST)
+    @PostMapping("/delete-record")
     public String deleteRecord(@RequestParam int id,
                                @RequestParam(name = "filter", required = false) String filterMode) {
         recordService.deleteRecord(id);
-        return "redirect:/home" + (filterMode != null && !filterMode.isBlank() ? "?filter=" + filterMode : "");
+        return "redirect:/account" + (filterMode != null && !filterMode.isBlank() ? "?filter=" + filterMode : "");
     }
 }

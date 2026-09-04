@@ -3,9 +3,17 @@
   <database-model serializer="dbm" dbms="POSTGRES" family-id="POSTGRES" format-version="4.51">
     <root id="1">
       <DateStyle>mdy</DateStyle>
-      <IntrospectionStateNumber>1099</IntrospectionStateNumber>
-      <ServerVersion>16.14</ServerVersion>
-      <StartupTime>1786516438</StartupTime>
+      <Grants>1||-9223372036854775808|c|G
+1||10|c|G
+1||10|C|G
+1||10|T|G
+4||-9223372036854775808|c|G
+4||10|c|G
+4||10|C|G
+4||10|T|G</Grants>
+      <IntrospectionStateNumber>1426</IntrospectionStateNumber>
+      <ServerVersion>16.15</ServerVersion>
+      <StartupTime>1788502796</StartupTime>
       <TimeZones>true ACDT
 true ACSST
 false ACST
@@ -803,7 +811,7 @@ true posixrules
 13294||10|C|G
 13294||-9223372036854775808|U|G
 13294||10|U|G</Grants>
-      <IntrospectionStateNumber>1099</IntrospectionStateNumber>
+      <IntrospectionStateNumber>1426</IntrospectionStateNumber>
       <ObjectId>17016</ObjectId>
       <OwnerName>postgres</OwnerName>
     </database>
@@ -820,50 +828,50 @@ true posixrules
       <ObjectId>17003</ObjectId>
       <OwnerName>postgres</OwnerName>
     </database>
-    <role id="6" parent="1" name="pg_database_owner">
+    <role id="6" parent="1" name="pg_checkpoint">
+      <ObjectId>4544</ObjectId>
+    </role>
+    <role id="7" parent="1" name="pg_create_subscription">
+      <ObjectId>6304</ObjectId>
+    </role>
+    <role id="8" parent="1" name="pg_database_owner">
       <ObjectId>6171</ObjectId>
     </role>
-    <role id="7" parent="1" name="pg_read_all_data">
-      <ObjectId>6181</ObjectId>
+    <role id="9" parent="1" name="pg_execute_server_program">
+      <ObjectId>4571</ObjectId>
     </role>
-    <role id="8" parent="1" name="pg_write_all_data">
-      <ObjectId>6182</ObjectId>
-    </role>
-    <role id="9" parent="1" name="pg_monitor">
+    <role id="10" parent="1" name="pg_monitor">
       <ObjectId>3373</ObjectId>
       <RoleGrants>3374
 3375
 3377</RoleGrants>
     </role>
-    <role id="10" parent="1" name="pg_read_all_settings">
+    <role id="11" parent="1" name="pg_read_all_data">
+      <ObjectId>6181</ObjectId>
+    </role>
+    <role id="12" parent="1" name="pg_read_all_settings">
       <ObjectId>3374</ObjectId>
     </role>
-    <role id="11" parent="1" name="pg_read_all_stats">
+    <role id="13" parent="1" name="pg_read_all_stats">
       <ObjectId>3375</ObjectId>
     </role>
-    <role id="12" parent="1" name="pg_stat_scan_tables">
-      <ObjectId>3377</ObjectId>
-    </role>
-    <role id="13" parent="1" name="pg_read_server_files">
+    <role id="14" parent="1" name="pg_read_server_files">
       <ObjectId>4569</ObjectId>
     </role>
-    <role id="14" parent="1" name="pg_write_server_files">
-      <ObjectId>4570</ObjectId>
-    </role>
-    <role id="15" parent="1" name="pg_execute_server_program">
-      <ObjectId>4571</ObjectId>
-    </role>
-    <role id="16" parent="1" name="pg_signal_backend">
+    <role id="15" parent="1" name="pg_signal_backend">
       <ObjectId>4200</ObjectId>
     </role>
-    <role id="17" parent="1" name="pg_checkpoint">
-      <ObjectId>4544</ObjectId>
+    <role id="16" parent="1" name="pg_stat_scan_tables">
+      <ObjectId>3377</ObjectId>
     </role>
-    <role id="18" parent="1" name="pg_use_reserved_connections">
+    <role id="17" parent="1" name="pg_use_reserved_connections">
       <ObjectId>4550</ObjectId>
     </role>
-    <role id="19" parent="1" name="pg_create_subscription">
-      <ObjectId>6304</ObjectId>
+    <role id="18" parent="1" name="pg_write_all_data">
+      <ObjectId>6182</ObjectId>
+    </role>
+    <role id="19" parent="1" name="pg_write_server_files">
+      <ObjectId>4570</ObjectId>
     </role>
     <role id="20" parent="1" name="postgres">
       <BypassRls>1</BypassRls>
@@ -4235,8 +4243,8 @@ true posixrules
     <schema id="266" parent="2" name="public">
       <Comment>standard public schema</Comment>
       <Current>1</Current>
-      <IntrospectionStateNumber>1099</IntrospectionStateNumber>
-      <LastIntrospectionLocalTimestamp>2026-08-12.07:36:05</LastIntrospectionLocalTimestamp>
+      <IntrospectionStateNumber>1426</IntrospectionStateNumber>
+      <LastIntrospectionLocalTimestamp>2026-09-04.07:03:10</LastIntrospectionLocalTimestamp>
       <ObjectId>2200</ObjectId>
       <StateNumber>523</StateNumber>
       <OwnerName>pg_database_owner</OwnerName>
@@ -4259,10 +4267,10 @@ true posixrules
     </sequence>
     <sequence id="269" parent="266" name="records_id_seq">
       <DasType>integer|0s</DasType>
-      <ObjectId>17189</ObjectId>
+      <ObjectId>17586</ObjectId>
       <SequenceIdentity>1</SequenceIdentity>
       <StartValue>1</StartValue>
-      <StateNumber>1028</StateNumber>
+      <StateNumber>1418</StateNumber>
       <OwnerName>postgres</OwnerName>
     </sequence>
     <sequence id="270" parent="266" name="sections_section_id_seq">
@@ -4281,43 +4289,57 @@ true posixrules
       <StateNumber>991</StateNumber>
       <OwnerName>postgres</OwnerName>
     </sequence>
-    <table id="272" parent="266" name="addresses">
+    <sequence id="272" parent="266" name="users_id_seq">
+      <DasType>integer|0s</DasType>
+      <ObjectId>17593</ObjectId>
+      <SequenceIdentity>1</SequenceIdentity>
+      <StartValue>1</StartValue>
+      <StateNumber>1419</StateNumber>
+      <OwnerName>postgres</OwnerName>
+    </sequence>
+    <table id="273" parent="266" name="addresses">
       <ObjectId>17116</ObjectId>
       <StateNumber>992</StateNumber>
       <AccessMethodId>2</AccessMethodId>
       <OwnerName>postgres</OwnerName>
     </table>
-    <table id="273" parent="266" name="groups">
+    <table id="274" parent="266" name="groups">
       <ObjectId>17123</ObjectId>
       <StateNumber>994</StateNumber>
       <AccessMethodId>2</AccessMethodId>
       <OwnerName>postgres</OwnerName>
     </table>
-    <table id="274" parent="266" name="records">
-      <ObjectId>17190</ObjectId>
-      <StateNumber>1028</StateNumber>
+    <table id="275" parent="266" name="records">
+      <ObjectId>17587</ObjectId>
+      <StateNumber>1420</StateNumber>
       <AccessMethodId>2</AccessMethodId>
       <OwnerName>postgres</OwnerName>
     </table>
-    <table id="275" parent="266" name="sections">
+    <table id="276" parent="266" name="sections">
       <ObjectId>17170</ObjectId>
       <StateNumber>1023</StateNumber>
       <AccessMethodId>2</AccessMethodId>
       <OwnerName>postgres</OwnerName>
     </table>
-    <table id="276" parent="266" name="students">
+    <table id="277" parent="266" name="students">
       <ObjectId>17137</ObjectId>
       <StateNumber>1004</StateNumber>
       <AccessMethodId>2</AccessMethodId>
       <OwnerName>postgres</OwnerName>
     </table>
-    <table id="277" parent="266" name="students_sections">
+    <table id="278" parent="266" name="students_sections">
       <ObjectId>17176</ObjectId>
       <StateNumber>1023</StateNumber>
       <AccessMethodId>2</AccessMethodId>
       <OwnerName>postgres</OwnerName>
     </table>
-    <column id="278" parent="272" name="id">
+    <table id="279" parent="266" name="users">
+      <ObjectId>17594</ObjectId>
+      <StateNumber>1420</StateNumber>
+      <AccessMethodId>2</AccessMethodId>
+      <OwnerName>postgres</OwnerName>
+    </table>
+    <column id="280" parent="273" name="id">
       <DasType>integer|0s</DasType>
       <DefaultExpression>nextval(&apos;addresses_id_seq&apos;::regclass)</DefaultExpression>
       <NotNull>1</NotNull>
@@ -4326,41 +4348,41 @@ true posixrules
       <SequenceId>17115</SequenceId>
       <TypeId>23</TypeId>
     </column>
-    <column id="279" parent="272" name="apartment_number">
+    <column id="281" parent="273" name="apartment_number">
       <DasType>integer|0s</DasType>
       <NotNull>1</NotNull>
       <Position>2</Position>
       <StateNumber>988</StateNumber>
       <TypeId>23</TypeId>
     </column>
-    <column id="280" parent="272" name="building_number">
+    <column id="282" parent="273" name="building_number">
       <DasType>integer|0s</DasType>
       <NotNull>1</NotNull>
       <Position>3</Position>
       <StateNumber>988</StateNumber>
       <TypeId>23</TypeId>
     </column>
-    <column id="281" parent="272" name="street">
+    <column id="283" parent="273" name="street">
       <DasType>varchar(64)|0s</DasType>
       <NotNull>1</NotNull>
       <Position>4</Position>
       <StateNumber>988</StateNumber>
       <TypeId>1043</TypeId>
     </column>
-    <column id="282" parent="272" name="student_id">
+    <column id="284" parent="273" name="student_id">
       <DasType>integer|0s</DasType>
       <Position>5</Position>
       <StateNumber>988</StateNumber>
       <TypeId>23</TypeId>
     </column>
-    <foreign-key id="283" parent="272" name="fkqq1nt3g94upydb2qt72xhnk7y">
+    <foreign-key id="285" parent="273" name="fkqq1nt3g94upydb2qt72xhnk7y">
       <ColNames>student_id</ColNames>
       <ObjectId>17143</ObjectId>
       <StateNumber>992</StateNumber>
       <RefKeyColPositions>1</RefKeyColPositions>
       <RefTableId>17137</RefTableId>
     </foreign-key>
-    <index id="284" parent="272" name="addresses_pkey">
+    <index id="286" parent="273" name="addresses_pkey">
       <ColNames>id</ColNames>
       <NameSurrogate>1</NameSurrogate>
       <ObjectId>17120</ObjectId>
@@ -4369,14 +4391,14 @@ true posixrules
       <Unique>1</Unique>
       <AccessMethodId>403</AccessMethodId>
     </index>
-    <key id="285" parent="272" name="addresses_pkey">
+    <key id="287" parent="273" name="addresses_pkey">
       <NameSurrogate>1</NameSurrogate>
       <ObjectId>17121</ObjectId>
       <Primary>1</Primary>
       <StateNumber>988</StateNumber>
       <UnderlyingIndexId>17120</UnderlyingIndexId>
     </key>
-    <column id="286" parent="273" name="id">
+    <column id="288" parent="274" name="id">
       <DasType>integer|0s</DasType>
       <DefaultExpression>nextval(&apos;groups_id_seq&apos;::regclass)</DefaultExpression>
       <NotNull>1</NotNull>
@@ -4385,21 +4407,21 @@ true posixrules
       <SequenceId>17122</SequenceId>
       <TypeId>23</TypeId>
     </column>
-    <column id="287" parent="273" name="faculty_type">
+    <column id="289" parent="274" name="faculty_type">
       <DasType>integer|0s</DasType>
       <NotNull>1</NotNull>
       <Position>2</Position>
       <StateNumber>989</StateNumber>
       <TypeId>23</TypeId>
     </column>
-    <column id="288" parent="273" name="group_number">
+    <column id="290" parent="274" name="group_number">
       <DasType>varchar(10)|0s</DasType>
       <NotNull>1</NotNull>
       <Position>3</Position>
       <StateNumber>989</StateNumber>
       <TypeId>1043</TypeId>
     </column>
-    <index id="289" parent="273" name="groups_pkey">
+    <index id="291" parent="274" name="groups_pkey">
       <ColNames>id</ColNames>
       <NameSurrogate>1</NameSurrogate>
       <ObjectId>17127</ObjectId>
@@ -4408,53 +4430,72 @@ true posixrules
       <Unique>1</Unique>
       <AccessMethodId>403</AccessMethodId>
     </index>
-    <key id="290" parent="273" name="groups_pkey">
+    <key id="292" parent="274" name="groups_pkey">
       <NameSurrogate>1</NameSurrogate>
       <ObjectId>17128</ObjectId>
       <Primary>1</Primary>
       <StateNumber>989</StateNumber>
       <UnderlyingIndexId>17127</UnderlyingIndexId>
     </key>
-    <column id="291" parent="274" name="id">
+    <check id="293" parent="275" name="records_status_check">
+      <ColNames>status</ColNames>
+      <ObjectId>17590</ObjectId>
+      <Predicate>(status &gt;= 0) AND (status &lt;= 1)</Predicate>
+      <StateNumber>1418</StateNumber>
+    </check>
+    <column id="294" parent="275" name="id">
       <DasType>integer|0s</DasType>
-      <DefaultExpression>nextval(&apos;records_id_seq&apos;::regclass)</DefaultExpression>
+      <IdentityKind>by-default</IdentityKind>
       <NotNull>1</NotNull>
       <Position>1</Position>
-      <StateNumber>1028</StateNumber>
-      <SequenceId>17189</SequenceId>
+      <StateNumber>1418</StateNumber>
+      <SequenceId>17586</SequenceId>
       <TypeId>23</TypeId>
     </column>
-    <column id="292" parent="274" name="status">
-      <DasType>integer|0s</DasType>
+    <column id="295" parent="275" name="status">
+      <DasType>smallint|0s</DasType>
       <NotNull>1</NotNull>
       <Position>2</Position>
-      <StateNumber>1028</StateNumber>
+      <StateNumber>1418</StateNumber>
+      <TypeId>21</TypeId>
+    </column>
+    <column id="296" parent="275" name="user_id">
+      <DasType>integer|0s</DasType>
+      <Position>3</Position>
+      <StateNumber>1418</StateNumber>
       <TypeId>23</TypeId>
     </column>
-    <column id="293" parent="274" name="title">
+    <column id="297" parent="275" name="title">
       <DasType>varchar(64)|0s</DasType>
       <NotNull>1</NotNull>
-      <Position>3</Position>
-      <StateNumber>1028</StateNumber>
+      <Position>4</Position>
+      <StateNumber>1418</StateNumber>
       <TypeId>1043</TypeId>
     </column>
-    <index id="294" parent="274" name="records_pkey">
+    <foreign-key id="298" parent="275" name="fk6p95uajgka0j0dc9vlbjw1sf1">
+      <ColNames>user_id</ColNames>
+      <ObjectId>17602</ObjectId>
+      <StateNumber>1420</StateNumber>
+      <RefKeyColPositions>1</RefKeyColPositions>
+      <RefTableId>17594</RefTableId>
+    </foreign-key>
+    <index id="299" parent="275" name="records_pkey">
       <ColNames>id</ColNames>
       <NameSurrogate>1</NameSurrogate>
-      <ObjectId>17194</ObjectId>
+      <ObjectId>17591</ObjectId>
       <Primary>1</Primary>
-      <StateNumber>1028</StateNumber>
+      <StateNumber>1418</StateNumber>
       <Unique>1</Unique>
       <AccessMethodId>403</AccessMethodId>
     </index>
-    <key id="295" parent="274" name="records_pkey">
+    <key id="300" parent="275" name="records_pkey">
       <NameSurrogate>1</NameSurrogate>
-      <ObjectId>17195</ObjectId>
+      <ObjectId>17592</ObjectId>
       <Primary>1</Primary>
-      <StateNumber>1028</StateNumber>
-      <UnderlyingIndexId>17194</UnderlyingIndexId>
+      <StateNumber>1418</StateNumber>
+      <UnderlyingIndexId>17591</UnderlyingIndexId>
     </key>
-    <column id="296" parent="275" name="section_id">
+    <column id="301" parent="276" name="section_id">
       <DasType>integer|0s</DasType>
       <DefaultExpression>nextval(&apos;sections_section_id_seq&apos;::regclass)</DefaultExpression>
       <NotNull>1</NotNull>
@@ -4463,14 +4504,14 @@ true posixrules
       <SequenceId>17169</SequenceId>
       <TypeId>23</TypeId>
     </column>
-    <column id="297" parent="275" name="section_type">
+    <column id="302" parent="276" name="section_type">
       <DasType>integer|0s</DasType>
       <NotNull>1</NotNull>
       <Position>2</Position>
       <StateNumber>1021</StateNumber>
       <TypeId>23</TypeId>
     </column>
-    <index id="298" parent="275" name="sections_pkey">
+    <index id="303" parent="276" name="sections_pkey">
       <ColNames>section_id</ColNames>
       <NameSurrogate>1</NameSurrogate>
       <ObjectId>17174</ObjectId>
@@ -4479,14 +4520,14 @@ true posixrules
       <Unique>1</Unique>
       <AccessMethodId>403</AccessMethodId>
     </index>
-    <key id="299" parent="275" name="sections_pkey">
+    <key id="304" parent="276" name="sections_pkey">
       <NameSurrogate>1</NameSurrogate>
       <ObjectId>17175</ObjectId>
       <Primary>1</Primary>
       <StateNumber>1021</StateNumber>
       <UnderlyingIndexId>17174</UnderlyingIndexId>
     </key>
-    <column id="300" parent="276" name="id">
+    <column id="305" parent="277" name="id">
       <DasType>integer|0s</DasType>
       <DefaultExpression>nextval(&apos;students_id_seq&apos;::regclass)</DefaultExpression>
       <NotNull>1</NotNull>
@@ -4495,60 +4536,60 @@ true posixrules
       <SequenceId>17136</SequenceId>
       <TypeId>23</TypeId>
     </column>
-    <column id="301" parent="276" name="age">
+    <column id="306" parent="277" name="age">
       <DasType>integer|0s</DasType>
       <NotNull>1</NotNull>
       <Position>2</Position>
       <StateNumber>991</StateNumber>
       <TypeId>23</TypeId>
     </column>
-    <column id="302" parent="276" name="first_name">
+    <column id="307" parent="277" name="first_name">
       <DasType>varchar(64)|0s</DasType>
       <NotNull>1</NotNull>
       <Position>3</Position>
       <StateNumber>991</StateNumber>
       <TypeId>1043</TypeId>
     </column>
-    <column id="303" parent="276" name="last_name">
+    <column id="308" parent="277" name="last_name">
       <DasType>varchar(64)|0s</DasType>
       <NotNull>1</NotNull>
       <Position>4</Position>
       <StateNumber>991</StateNumber>
       <TypeId>1043</TypeId>
     </column>
-    <column id="304" parent="276" name="middle_name">
+    <column id="309" parent="277" name="middle_name">
       <DasType>varchar(64)|0s</DasType>
       <Position>5</Position>
       <StateNumber>991</StateNumber>
       <TypeId>1043</TypeId>
     </column>
-    <column id="305" parent="276" name="group_id">
+    <column id="310" parent="277" name="group_id">
       <DasType>integer|0s</DasType>
       <Position>6</Position>
       <StateNumber>991</StateNumber>
       <TypeId>23</TypeId>
     </column>
-    <column id="306" parent="276" name="address_id">
+    <column id="311" parent="277" name="address_id">
       <DasType>integer|0s</DasType>
       <Position>8</Position>
       <StateNumber>1004</StateNumber>
       <TypeId>23</TypeId>
     </column>
-    <foreign-key id="307" parent="276" name="fkmsev1nou0j86spuk5jrv19mss">
+    <foreign-key id="312" parent="277" name="fkmsev1nou0j86spuk5jrv19mss">
       <ColNames>group_id</ColNames>
       <ObjectId>17153</ObjectId>
       <StateNumber>994</StateNumber>
       <RefKeyColPositions>1</RefKeyColPositions>
       <RefTableId>17123</RefTableId>
     </foreign-key>
-    <foreign-key id="308" parent="276" name="fkefnng0g6wqmnmuo7tt0kumd5r">
+    <foreign-key id="313" parent="277" name="fkefnng0g6wqmnmuo7tt0kumd5r">
       <ColNames>address_id</ColNames>
       <ObjectId>17164</ObjectId>
       <StateNumber>1005</StateNumber>
       <RefKeyColPositions>1</RefKeyColPositions>
       <RefTableId>17116</RefTableId>
     </foreign-key>
-    <index id="309" parent="276" name="students_pkey">
+    <index id="314" parent="277" name="students_pkey">
       <ColNames>id</ColNames>
       <NameSurrogate>1</NameSurrogate>
       <ObjectId>17141</ObjectId>
@@ -4557,40 +4598,116 @@ true posixrules
       <Unique>1</Unique>
       <AccessMethodId>403</AccessMethodId>
     </index>
-    <key id="310" parent="276" name="students_pkey">
+    <key id="315" parent="277" name="students_pkey">
       <NameSurrogate>1</NameSurrogate>
       <ObjectId>17142</ObjectId>
       <Primary>1</Primary>
       <StateNumber>991</StateNumber>
       <UnderlyingIndexId>17141</UnderlyingIndexId>
     </key>
-    <column id="311" parent="277" name="student_id">
+    <column id="316" parent="278" name="student_id">
       <DasType>integer|0s</DasType>
       <NotNull>1</NotNull>
       <Position>1</Position>
       <StateNumber>1022</StateNumber>
       <TypeId>23</TypeId>
     </column>
-    <column id="312" parent="277" name="section_id">
+    <column id="317" parent="278" name="section_id">
       <DasType>integer|0s</DasType>
       <NotNull>1</NotNull>
       <Position>2</Position>
       <StateNumber>1022</StateNumber>
       <TypeId>23</TypeId>
     </column>
-    <foreign-key id="313" parent="277" name="fkk5vb1nv1py1f07qmpo8brbum2">
+    <foreign-key id="318" parent="278" name="fkk5vb1nv1py1f07qmpo8brbum2">
       <ColNames>student_id</ColNames>
       <ObjectId>17184</ObjectId>
       <StateNumber>1024</StateNumber>
       <RefKeyColPositions>1</RefKeyColPositions>
       <RefTableId>17137</RefTableId>
     </foreign-key>
-    <foreign-key id="314" parent="277" name="fk8vps5745ktp2c53m6koh5pr5l">
+    <foreign-key id="319" parent="278" name="fk8vps5745ktp2c53m6koh5pr5l">
       <ColNames>section_id</ColNames>
       <ObjectId>17179</ObjectId>
       <StateNumber>1023</StateNumber>
       <RefKeyColPositions>1</RefKeyColPositions>
       <RefTableId>17170</RefTableId>
     </foreign-key>
+    <check id="320" parent="279" name="users_role_check">
+      <ColNames>role</ColNames>
+      <ObjectId>17597</ObjectId>
+      <Predicate>(role &gt;= 0) AND (role &lt;= 2)</Predicate>
+      <StateNumber>1419</StateNumber>
+    </check>
+    <column id="321" parent="279" name="id">
+      <DasType>integer|0s</DasType>
+      <IdentityKind>by-default</IdentityKind>
+      <NotNull>1</NotNull>
+      <Position>1</Position>
+      <StateNumber>1419</StateNumber>
+      <SequenceId>17593</SequenceId>
+      <TypeId>23</TypeId>
+    </column>
+    <column id="322" parent="279" name="role">
+      <DasType>smallint|0s</DasType>
+      <NotNull>1</NotNull>
+      <Position>2</Position>
+      <StateNumber>1419</StateNumber>
+      <TypeId>21</TypeId>
+    </column>
+    <column id="323" parent="279" name="name">
+      <DasType>varchar(20)|0s</DasType>
+      <NotNull>1</NotNull>
+      <Position>3</Position>
+      <StateNumber>1419</StateNumber>
+      <TypeId>1043</TypeId>
+    </column>
+    <column id="324" parent="279" name="email">
+      <DasType>varchar(30)|0s</DasType>
+      <NotNull>1</NotNull>
+      <Position>4</Position>
+      <StateNumber>1419</StateNumber>
+      <TypeId>1043</TypeId>
+    </column>
+    <column id="325" parent="279" name="password">
+      <DasType>varchar(60)|0s</DasType>
+      <NotNull>1</NotNull>
+      <Position>5</Position>
+      <StateNumber>1419</StateNumber>
+      <TypeId>1043</TypeId>
+    </column>
+    <index id="326" parent="279" name="users_pkey">
+      <ColNames>id</ColNames>
+      <NameSurrogate>1</NameSurrogate>
+      <ObjectId>17598</ObjectId>
+      <Primary>1</Primary>
+      <StateNumber>1419</StateNumber>
+      <Unique>1</Unique>
+      <AccessMethodId>403</AccessMethodId>
+    </index>
+    <index id="327" parent="279" name="users_email_key">
+      <ColNames>email</ColNames>
+      <NameSurrogate>1</NameSurrogate>
+      <ObjectId>17600</ObjectId>
+      <StateNumber>1419</StateNumber>
+      <Unique>1</Unique>
+      <AccessMethodId>403</AccessMethodId>
+      <CollationNames>default</CollationNames>
+      <CollationIds>100</CollationIds>
+      <CollationParentNames>pg_catalog</CollationParentNames>
+    </index>
+    <key id="328" parent="279" name="users_pkey">
+      <NameSurrogate>1</NameSurrogate>
+      <ObjectId>17599</ObjectId>
+      <Primary>1</Primary>
+      <StateNumber>1419</StateNumber>
+      <UnderlyingIndexId>17598</UnderlyingIndexId>
+    </key>
+    <key id="329" parent="279" name="users_email_key">
+      <NameSurrogate>1</NameSurrogate>
+      <ObjectId>17601</ObjectId>
+      <StateNumber>1419</StateNumber>
+      <UnderlyingIndexId>17600</UnderlyingIndexId>
+    </key>
   </database-model>
 </dataSource>
